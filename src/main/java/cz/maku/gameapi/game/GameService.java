@@ -1,6 +1,7 @@
 package cz.maku.gameapi.game;
 
 import cz.maku.gameapi.configuration.GameConfiguration;
+import cz.maku.gameapi.map.GameMap;
 import cz.maku.mommons.worker.annotation.PostInitialize;
 import cz.maku.mommons.worker.annotation.Service;
 import lombok.Getter;
@@ -15,6 +16,10 @@ public class GameService {
 
     @Getter
     private GameState gameState;
+
+    @Getter
+    @Setter
+    private GameMap map;
 
     @PostInitialize
     private void initGame() {

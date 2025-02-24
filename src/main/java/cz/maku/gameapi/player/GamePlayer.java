@@ -1,6 +1,7 @@
 package cz.maku.gameapi.player;
 
 import cz.maku.gameapi.kit.GameKit;
+import cz.maku.gameapi.map.GameMap;
 import cz.maku.gameapi.team.GameTeam;
 import cz.maku.mommons.Response;
 import cz.maku.mommons.player.CloudPlayer;
@@ -19,6 +20,8 @@ public class GamePlayer extends CloudPlayer {
     private GameTeam team;
     @Nullable
     private GameKit kit;
+    @Nullable
+    private GameMap votedMap;
     private boolean dead;
 
     public GamePlayer(CloudPlayer cloudPlayer) {

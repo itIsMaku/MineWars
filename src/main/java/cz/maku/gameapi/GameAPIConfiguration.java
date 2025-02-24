@@ -7,6 +7,8 @@ import cz.maku.gameapi.game.GameService;
 import cz.maku.gameapi.game.SelectorsService;
 import cz.maku.gameapi.game.WaitingBukkitService;
 import cz.maku.gameapi.kit.GameKitService;
+import cz.maku.gameapi.map.GameMapBukkitService;
+import cz.maku.gameapi.map.GameMapService;
 import cz.maku.gameapi.player.GamePlayersBukkitService;
 import cz.maku.gameapi.player.GamePlayersService;
 import cz.maku.gameapi.team.GameTeamBukkitService;
@@ -29,7 +31,9 @@ public final class GameAPIConfiguration {
             SelectorsService.class,
             GameKitService.class,
             GamePlayersService.class,
-            GamePlayersBukkitService.class
+            GamePlayersBukkitService.class,
+            GameMapService.class,
+            GameMapBukkitService.class
     );
     public static final String PREFIX = "§8[§6%s§8]§7";
     public static final List<String> ALLOWED_COMMANDS = List.of(

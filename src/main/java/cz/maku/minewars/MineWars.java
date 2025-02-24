@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import cz.maku.gameapi.Game;
 import cz.maku.gameapi.bukkit.GameInventory;
 import cz.maku.gameapi.kit.GameKit;
+import cz.maku.gameapi.map.GameMap;
 import cz.maku.mommons.worker.plugin.WorkerPlugin;
 import lombok.Getter;
 import me.zort.containr.internal.util.Items;
@@ -72,6 +73,11 @@ public class MineWars extends WorkerPlugin {
                         )
                 )
         ));
+
+        game.registerMap(new GameMap("map1", "Mapa 1"));
+        game.registerMap(new GameMap("map2", "Mapa 2"));
+        game.registerMap(new GameMap("map3", "Mapa 3"));
+        game.registerMap(new GameMap("map4", "Mapa 4"));
     }
 
     @Override

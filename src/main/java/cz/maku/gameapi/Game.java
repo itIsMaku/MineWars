@@ -3,6 +3,8 @@ package cz.maku.gameapi;
 import cz.maku.gameapi.configuration.ConfigurationService;
 import cz.maku.gameapi.kit.GameKit;
 import cz.maku.gameapi.kit.GameKitService;
+import cz.maku.gameapi.map.GameMap;
+import cz.maku.gameapi.map.GameMapService;
 import cz.maku.mommons.worker.WorkerReceiver;
 import cz.maku.mommons.worker.plugin.WorkerPlugin;
 import lombok.Getter;
@@ -94,5 +96,28 @@ public class Game {
         }
 
         return kitService.unregisterKit(kit);
+    }
+
+    @Nullable
+    private GameMapService getMapService() {
+        return WorkerReceiver.getService(plugin.getClass(), GameMapService.class);
+    }
+
+    public void registerMap(GameMap map) {
+        GameMapService mapService = getMapService();
+        if (mapService == null) {
+            throw new IllegalStateException("GameMapService is not registered!");
+        }
+
+        mapService.registerMap(map);
+    }
+
+    public void unregisterMap(GameMap map) {
+        GameMapService mapService = getMapService();
+        if (mapService == null) {
+            throw new IllegalStateException("GameMapService is not registered!");
+        }
+
+        mapService.unregisterMap(map);
     }
 }
