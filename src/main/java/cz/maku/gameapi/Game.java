@@ -1,14 +1,20 @@
 package cz.maku.gameapi;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import cz.maku.gameapi.configuration.ConfigurationService;
+import cz.maku.gameapi.configuration.GameConfigurationExclusionStrategy;
 import cz.maku.gameapi.kit.GameKit;
 import cz.maku.gameapi.kit.GameKitService;
 import cz.maku.gameapi.map.GameMap;
 import cz.maku.gameapi.map.GameMapService;
+import cz.maku.gameapi.shop.GameShop;
+import cz.maku.mommons.Mommons;
 import cz.maku.mommons.worker.WorkerReceiver;
 import cz.maku.mommons.worker.plugin.WorkerPlugin;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import me.zort.containr.Containr;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -22,6 +28,14 @@ import java.util.logging.Logger;
 @Getter
 public class Game {
 
+    private static final GameConfigurationExclusionStrategy gameConfigurationExclusionStrategy = new GameConfigurationExclusionStrategy();
+    public static final Gson GSON = new GsonBuilder()
+            .setLenient()
+            .enableComplexMapKeySerialization()
+            .addSerializationExclusionStrategy(gameConfigurationExclusionStrategy)
+            .addDeserializationExclusionStrategy(gameConfigurationExclusionStrategy)
+            .create();
+
     @Getter
     private static Game instance;
 
@@ -31,16 +45,16 @@ public class Game {
     private final String displayName;
     private final String shortcut;
     private final Material icon;
+    @Setter
+    private GameShop gameShop;
     private WorkerPlugin plugin;
 
-    public void init(WorkerPlugin plugin) {
+    public void load(WorkerPlugin plugin) {
         instance = this;
 
         this.plugin = plugin;
         logger = Logger.getLogger("GameAPI");
-    }
 
-    public void load() {
         if (plugin == null) {
             throw new IllegalStateException("Plugin is not initialized!");
         }
@@ -59,7 +73,7 @@ public class Game {
 
     }
 
-    public List<Class<?>> getServices() {
+    public static List<Class<?>> getServices() {
         return GameAPIConfiguration.SERVICES;
     }
 

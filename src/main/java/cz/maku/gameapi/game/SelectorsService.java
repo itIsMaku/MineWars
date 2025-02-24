@@ -77,7 +77,7 @@ public class SelectorsService {
                     .title("Výběr týmu")
                     .rows(2)
                     .prepare(gui -> {
-                        for (Map.Entry<GameTeam, List<String>> entry : gameTeamService.getPlayersTeams().entrySet()) {
+                        for (Map.Entry<GameTeam, List<String>> entry : GameTeamService.TEAMS.entrySet()) {
                             GameTeam team = entry.getKey();
                             List<String> players = entry.getValue().stream().map(pl -> "§8- §f" + pl).toList();
                             gui.appendElement(Component.element()

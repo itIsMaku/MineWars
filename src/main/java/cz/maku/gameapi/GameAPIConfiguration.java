@@ -37,6 +37,9 @@ public final class GameAPIConfiguration {
     );
     public static final String PREFIX = "§8[§6%s§8]§7";
     public static final List<String> ALLOWED_COMMANDS = List.of(
-            "/lobby"
+            "/lobby",
+            "/admin",
+            "/vote",
+            "/paper:callback"
     );
 }

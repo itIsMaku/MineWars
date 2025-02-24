@@ -1,10 +1,13 @@
 package cz.maku.gameapi.map;
 
 
+import com.google.common.collect.Lists;
 import cz.maku.gameapi.Game;
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
 
 import java.io.File;
+import java.util.Collection;
 
 public final class WorldsUtils {
 
@@ -57,6 +60,12 @@ public final class WorldsUtils {
 
     public static World getDefault() {
         return Bukkit.getWorlds().getFirst();
+    }
+
+    public static <T extends Entity> Collection<T> getWorldEntities(String world, Class<T> clazz) {
+        World worldInstance = Bukkit.getWorld(world);
+        if (worldInstance == null) return Lists.newArrayList();
+        return worldInstance.getEntitiesByClass(clazz);
     }
 
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
 
 @AllArgsConstructor
 @Getter
@@ -15,5 +16,10 @@ public class GameTeam {
 
     public String getDisplayName() {
         return color + Texts.capitalize(color.name().replace("_", " ").toLowerCase()) + "§r";
+    }
+
+
+    public @NotNull Material getWool() {
+        return TeamsConfiguration.TEAM_WOOLS.get(color);
     }
 }

@@ -22,7 +22,8 @@ public class GamePlayer extends CloudPlayer {
     private GameKit kit;
     @Nullable
     private GameMap votedMap;
-    private boolean dead;
+    private boolean dead = false;
+    private boolean adminMode = false;
 
     public GamePlayer(CloudPlayer cloudPlayer) {
         super(cloudPlayer);
@@ -52,5 +53,9 @@ public class GamePlayer extends CloudPlayer {
 
     public boolean canSelectKit(GameKit kit) {
         return bukkit().hasPermission("gameapi.kit." + kit.getName());
+    }
+
+    public boolean isAdmin() {
+        return bukkit().hasPermission("gameapi.admin");
     }
 }

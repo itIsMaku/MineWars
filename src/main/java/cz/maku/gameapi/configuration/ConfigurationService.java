@@ -44,13 +44,12 @@ public class ConfigurationService {
             return;
         }
 
-        JsonGameConfiguration jsonGameConfiguration = Mommons.GSON.fromJson(reader, JsonGameConfiguration.class);
-        if (jsonGameConfiguration == null) {
+        GameConfiguration gameConfiguration = Game.GSON.fromJson(reader, GameConfiguration.class);
+        if (gameConfiguration == null) {
             logger.severe("Failed to parse configuration file. Please check if the file is valid JSON.");
             return;
         }
-        
-        GameConfiguration gameConfiguration = GameConfiguration.from(jsonGameConfiguration);
+
         if (!gameConfiguration.isEnabled()) {
             logger.severe("Game is disabled in configuration. Please enable it and restart the server.");
             return;

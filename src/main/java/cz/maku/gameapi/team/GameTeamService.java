@@ -25,8 +25,7 @@ public class GameTeamService {
     @Load
     private GameService gameService;
 
-    @Getter
-    private Map<GameTeam, List<String>> playersTeams = Maps.newHashMap();
+    public static final Map<GameTeam, List<String>> TEAMS = Maps.newHashMap();
 
     @PostInitialize
     private void postInit() {
@@ -37,7 +36,7 @@ public class GameTeamService {
                 if (pair == null) break;
 
                 GameTeam gameTeam = new GameTeam(pair.getFirst(), pair.getSecond());
-                playersTeams.put(gameTeam, Lists.newArrayList());
+                TEAMS.put(gameTeam, Lists.newArrayList());
                 Game.getLogger().info("Registered team " + gameTeam.getDisplayName() + "§r.");
             }
         }, 20 * 2);
@@ -45,7 +44,7 @@ public class GameTeamService {
     }
 
     public boolean canJoinTeam(Player player, GameTeam gameTeam) {
-        return playersTeams.get(gameTeam).size() < gameService.getGameConfiguration().getMaxTeamSize();
+        return TEAMS.get(gameTeam).size() < gameService.getGameConfiguration().getMaxTeamSize();
     }
 
     public boolean joinTeam(Player player, GameTeam gameTeam) {
@@ -57,7 +56,7 @@ public class GameTeamService {
         String nick = player.getName();
         if (!leaveTeam(player, gameTeam)) return false;
 
-        playersTeams.get(gameTeam).add(nick);
+        TEAMS.get(gameTeam).add(nick);
         Game.getInstance().sendPlayerMessage(player, "Připojil ses do týmu " + gameTeam.getDisplayName() + "§7.");
 
         player.setDisplayName(gameTeam.getColor() + player.getName() + "§7");
@@ -71,7 +70,7 @@ public class GameTeamService {
 
     public boolean leaveTeam(Player player, GameTeam gameTeam) {
         String nick = player.getName();
-        Optional<Map.Entry<GameTeam, List<String>>> previousEntry = playersTeams.entrySet().stream().filter(entry -> entry.getValue().contains(nick)).findFirst();
+        Optional<Map.Entry<GameTeam, List<String>>> previousEntry = TEAMS.entrySet().stream().filter(entry -> entry.getValue().contains(nick)).findFirst();
         if (previousEntry.isEmpty()) return true;
 
         GameTeam previousTeam = previousEntry.get().getKey();
@@ -80,7 +79,7 @@ public class GameTeamService {
             return false;
         }
 
-        playersTeams.get(previousTeam).remove(nick);
+        TEAMS.get(previousTeam).remove(nick);
         Game.getInstance().sendPlayerMessage(player, "Odpojil ses z týmu " + previousTeam.getDisplayName() + "§7.");
 
         GamePlayer gamePlayer = GamePlayer.getInstance(player);
@@ -95,7 +94,7 @@ public class GameTeamService {
 
     public GameTeam getTeam(Player player) {
         String nick = player.getName();
-        Optional<Map.Entry<GameTeam, List<String>>> entry = playersTeams.entrySet().stream().filter(e -> e.getValue().contains(nick)).findFirst();
+        Optional<Map.Entry<GameTeam, List<String>>> entry = TEAMS.entrySet().stream().filter(e -> e.getValue().contains(nick)).findFirst();
         return entry.map(Map.Entry::getKey).orElse(null);
     }
 
