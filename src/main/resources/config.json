@@ -1,0 +1,21 @@
+{
+  "enabled": false,
+  "maxTeamSize": 4,
+  "maxTeams": 4,
+  "minPlayersStart": 4,
+  "rawLobbyLocation": "world;-83.615;64.0;72.535;179.7;-4.8",
+  "rawTeamLocations": [
+    {
+      "world;-83.556;64.0;77.464;179.2;80.8": "spawn"
+    },
+    {
+      "world;-78.493;64.0;72.485;177.4;82.1": "spawn"
+    },
+    {
+      "world;-83.567;64.0;67.584;-176.6;86.6": "spawn"
+    },
+    {
+      "world;-88.489;64.0;72.489;-178.1;88.5": "spawn"
+    }
+  ]
+}

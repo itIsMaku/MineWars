@@ -1,0 +1,7 @@
+name: MineWars
+version: '1.0'
+main: cz.maku.minewars.MineWars
+api-version: '1.21'
+depend: [ 'MommonsLoader', 'NBTAPI' ]
+author: itIsMaku
+
